@@ -1,15 +1,23 @@
 #ifndef LIGHT_H
 #define LIGHT_H
 
-#include <vector>
-#include "vec3.h"
-using namespace std;
+#include "Vector.h"
+#include "Color.h"
 
 class Light {
 public:
-	Vec3 position;
-	Vec3 colors;
-	Light(Vec3, Vec3);
+  //  Vector position;
+  //  double intensity;
+
+//
+  Vector origin_coord_;
+  float intensity_;
+  Color color_;
+  float radius_;
+//
+
+  //  Light(Vector position_, double intensity_) :
+  //   position(position_), intensity(intensity_) {}
 };
 
 #endif

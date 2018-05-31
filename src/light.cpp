@@ -1,5 +1,5 @@
 #include "light.h"
-Light::Light(Vec3 position, Vec3 colors) {
-	this->colors = colors * 10000;
-	this->position = position;
-}
+// Light::Light(Vector position, Vector colors) {
+// 	this->colors = colors * 10000;
+// 	this->position = position;
+// }
