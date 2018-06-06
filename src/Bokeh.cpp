@@ -7,25 +7,28 @@
 #include <stack>
 #include <ctime>
 
-#include "Vector.h"
-#include "Camera.h"
-
-#include "Ray.h"
-#include "Color.h"
-#include "Intersection.h"
-#include "Object.h"
-#include "Plane.h"
-#include "Light.h"
-#include "Material.h"
-#include "Sphere.h"
 #include "Scene.h"
-#include "Triangle.h"
-#include "RayTracer.h"
+#include "Color.h"
+
+#include "Maths/Vector.h"
+#include "Maths/Ray.h"
+#include "Maths/Intersection.h"
+#include "Export/Image.h"
+#include "Export/Tga.h"
+#include "Camera/Camera.h"
+#include "Geometry/Object.h"
+#include "Geometry/Solid/Plane.h"
+#include "Geometry/Solid/Sphere.h"
+#include "Geometry/Polygon/Triangle.h"
+#include "Lighting/Light.h"
+#include "Shading/Material.h"
+#include "Rendering/RayTracer.h"
 
 using namespace std;
 
-int main(int argc, char** argv)
+int main(int argc, char **argv)
 {
+	string outfile_name("test.tga");
 	Scene scene;
 
 	scene.camera_ = new Camera();
@@ -34,9 +37,9 @@ int main(int argc, char** argv)
 	scene.camera_->plane_width_ = 18;
 	scene.camera_->plane_height_ = 12;
 
-	scene.ambient_ = Color(1,1,1);
+	scene.ambient_ = Color(1, 1, 1);
 
-	Light* light = new Light();
+	Light *light = new Light();
 	light->origin_coord_ = Vector(2.5, 10, 5);
 	light->color_ = Color(1, 1, 1);
 	light->intensity_ = 7;
@@ -44,7 +47,7 @@ int main(int argc, char** argv)
 
 	scene.lights_.push_back(light);
 
-	Material* mat = new Material();
+	Material *mat = new Material();
 	mat->cDiffuse = Color(1, 1, 1);
 	mat->cReflection = Color(1, 1, 1);
 	mat->cSpecular = Color(1, 1, 1);
@@ -65,7 +68,7 @@ int main(int argc, char** argv)
 	scene.objects_.push_back(new Plane(Vector(0, 0, 0), Vector(0, 0, 1), mat));
 
 	// triangle (point0) (point1) (point2) material_name
-	scene.objects_.push_back(new Triangle(Vector(0.8, 14, 3),Vector(1.5, 13, 0),Vector(3, 14, 1.5), mat));
+	scene.objects_.push_back(new Triangle(Vector(0.8, 14, 3), Vector(1.5, 13, 0), Vector(3, 14, 1.5), mat));
 
 	// qualityparams max_reflections softlight_quality occlusion_quality
 	scene.max_reflections_ = 5;
@@ -74,18 +77,20 @@ int main(int argc, char** argv)
 
 	// render width height outfile
 	//render 900 600 sample_scene.png
-	RayTracer rayGun = RayTracer();
-	rayGun.scene = &scene;
+	RayTracer renderer = RayTracer();
+	renderer.scene = &scene;
 
-    std::cout << "Rendering..." << std::endl;
-	
+	std::cout << "Rendering..." << std::endl;
+
 	time_t start = time(0);
-	Image output = rayGun.render(900, 600);
+	Tga output = Tga(900,600);
+	renderer.render(900, 600, &output);
+
 	std::cout << "Rendering finished in " << difftime(time(0), start) << " seconds." << std::endl;
 
-//	std::cout << "Writing to " << outfile_name << "." << std::endl;
+	std::cout << "Writing to " << outfile_name << "." << std::endl;
 
-	output.WriteTga("test.tga");	
+	output.Save(outfile_name.c_str(), true);
 
-    exit(EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }

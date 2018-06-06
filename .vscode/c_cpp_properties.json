@@ -4,7 +4,8 @@
             "name": "Win32",
             "intelliSenseMode": "clang-x64",
             "includePath": [
-                "C:\\Tools\\MinGW\\lib\\gcc\\mingw32\\6.3.0\\include\\c++"
+                "C:\\Tools\\MinGW\\lib\\gcc\\mingw32\\6.3.0\\include\\c++",
+                "${workspaceFolder}/src"
             ],
             "defines": [
                 "_DEBUG",

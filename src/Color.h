@@ -8,30 +8,31 @@
  */
 #include <math.h>
 
-class Color {
- public:
-  Color(float r, float g, float b)
-      : r_(r), g_(g), b_(b) {}
-  Color() : r_(0), g_(0), b_(0) {}
+class Color
+{
+  public:
+    Color(float r, float g, float b)
+        : r_(r), g_(g), b_(b) {}
+    Color() : r_(0), g_(0), b_(0) {}
 
-  float r() { return r_; }
-  float g() { return g_; }
-  float b() { return b_; }
-  float a() { return a_; }
+    float r() { return r_; }
+    float g() { return g_; }
+    float b() { return b_; }
+    float a() { return a_; }
 
-  void clamp();
-  void gammaCorrect();
+    void clamp();
+    void gammaCorrect();
 
-  Color operator+=(const Color& other);
-  Color operator+(const Color& other) const;
-  Color operator*(float k) const;
-  Color operator*(const Color& other) const;
-  Color operator/(float k) const;
+    Color operator+=(const Color &other);
+    Color operator+(const Color &other) const;
+    Color operator*(float k) const;
+    Color operator*(const Color &other) const;
+    Color operator/(float k) const;
 
- private:
-  float gammaEncode(float c);
+  private:
+    float gammaEncode(float c);
 
-  float r_, g_, b_, a_;
+    float r_, g_, b_, a_;
 };
 
 #endif

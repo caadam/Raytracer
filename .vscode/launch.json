@@ -6,7 +6,7 @@
             "name": "(gdb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/bin/vector.exe",
+            "program": "${workspaceFolder}/bin/bokeh.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
@@ -27,7 +27,7 @@
             "name": "C++ Attach",
             "type": "cppdbg",
             "request": "attach",
-            "program": "${workspaceFolder}/bin/vector.exe",
+            "program": "${workspaceFolder}/bin/bokeh.exe",
             "processId": "${command:pickProcess}",
             "windows": {
                 "MIMode": "gdb",
