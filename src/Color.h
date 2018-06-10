@@ -11,14 +11,23 @@
 class Color
 {
   public:
+    // RGB
     Color(float r, float g, float b)
         : r_(r), g_(g), b_(b) {}
-    Color() : r_(0), g_(0), b_(0) {}
+    // RGBA
+    Color(float r, float g, float b, float a)
+        : r_(r), g_(g), b_(b), a_(a) {}
+    // RGBAZ
+    Color(float r, float g, float b, float a, float z)
+        : r_(r), g_(g), b_(b), a_(a), z_(z) {}
+        
+    Color() : r_(0), g_(0), b_(0), a_(0), z_(0) {}
 
     float r() { return r_; }
     float g() { return g_; }
     float b() { return b_; }
     float a() { return a_; }
+    float z() { return z_; }
 
     void clamp();
     void gammaCorrect();
@@ -32,7 +41,7 @@ class Color
   private:
     float gammaEncode(float c);
 
-    float r_, g_, b_, a_;
+    float r_, g_, b_, a_, z_;
 };
 
 #endif

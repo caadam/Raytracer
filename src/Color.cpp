@@ -17,6 +17,10 @@ void Color::clamp()
     g_ = 1;
   if (b_ > 1)
     b_ = 1;
+  if (a_ > 1)
+    a_ = 1;
+  if (z_ > 1)
+    z_ = 1;
 }
 
 void Color::gammaCorrect()
@@ -24,6 +28,8 @@ void Color::gammaCorrect()
   r_ = gammaEncode(r_);
   g_ = gammaEncode(g_);
   b_ = gammaEncode(b_);
+  a_ = gammaEncode(a_);
+  z_ = gammaEncode(z_);
 }
 
 Color Color::operator+=(const Color &other)
@@ -31,6 +37,7 @@ Color Color::operator+=(const Color &other)
   r_ += other.r_;
   g_ += other.g_;
   b_ += other.b_;
+  a_ += other.a_;
   return *this;
 }
 
@@ -41,15 +48,15 @@ Color Color::operator+(const Color &other) const
 
 Color Color::operator*(float k) const
 {
-  return Color(r_ * k, g_ * k, b_ * k);
+  return Color(r_ * k, g_ * k, b_ * k, a_ * k);
 }
 
 Color Color::operator*(const Color &other) const
 {
-  return Color(r_ * other.r_, g_ * other.g_, b_ * other.b_);
+  return Color(r_ * other.r_, g_ * other.g_, b_ * other.b_, a_ * other.a_);
 }
 
 Color Color::operator/(float k) const
 {
-  return Color(r_ / k, g_ / k, b_ / k);
+  return Color(r_ / k, g_ / k, b_ / k, a_ / k);
 }
