@@ -14,7 +14,7 @@
 #include "Maths/Ray.h"
 #include "Maths/Intersection.h"
 #include "Export/Image.h"
-#include "Export/Tga.h"
+#include "Export/Image/Tga.h"
 #include "Camera/Camera.h"
 #include "Geometry/Object.h"
 #include "Geometry/Solid/Plane.h"
@@ -22,7 +22,7 @@
 #include "Geometry/Polygon/Triangle.h"
 #include "Lighting/Light.h"
 #include "Shading/Material.h"
-#include "Rendering/RayTracer.h"
+#include "Rendering/Unbiased/RayTracer.h"
 
 using namespace std;
 
